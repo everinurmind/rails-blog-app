@@ -3,7 +3,7 @@ require_relative '../rails_helper'
 RSpec.describe Comment, type: :model do
   let(:user) { User.create(name: 'John Doe') }
   let(:post) { Post.create(title: 'Hello', author: user) }
-  subject { Comment.new(author: user, post: post) }
+  subject { Comment.new(author: user, post:) }
 
   it 'is valid with valid attributes' do
     expect(subject).to be_valid
