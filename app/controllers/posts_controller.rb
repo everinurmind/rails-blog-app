@@ -1,2 +1,14 @@
+require_relative '../models/user'
+require_relative '../models/post'
+
 class PostsController < ApplicationController
-end
+    def index
+      @user = User.find(params[:user_id])
+      @posts = @user.posts
+    end
+  
+    def show
+      @user = User.find(params[:user_id])
+      @post = @user.posts.find(params[:id])
+    end
+  end
