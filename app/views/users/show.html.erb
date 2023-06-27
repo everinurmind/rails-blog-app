@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <h1>User Profile</h1>
+  <h2>Name: <%= @user.name %></h2>
+  <p>Photo: <%= @user.photo %></p>
+  <p>Bio: <%= @user.bio %></p>
+  <h3>Recent Posts</h3>
+  <ul>
+    <% @user.recent_posts.each do |post| %>
+      <li><%= link_to post.title, user_post_path(@user, post) %></li>
+    <% end %>
+  </ul>
+</html>

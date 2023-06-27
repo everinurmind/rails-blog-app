@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <h1>Post</h1>
+  <h2>Title: <%= @post.title %></h2>
+  <p>Text: <%= @post.text %></p>
+  <p>Comments Counter: <%= @post.comments_counter %></p>
+  <p>Likes Counter: <%= @post.likes_counter %></p>
+  <h3>Recent Comments</h3>
+  <ul>
+    <% @post.recent_comments.each do |comment| %>
+      <li><%= comment.text %></li>
+    <% end %>
+  </ul>
+</html>
