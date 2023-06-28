@@ -10,6 +10,7 @@
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
   - [Install](#install)
+  - [Database Setup](#database-setup)
   - [Usage](#usage)
   - [Run tests](#run-tests)
 - [👥 Authors](#authors)
@@ -93,7 +94,7 @@ Install dependencies:
 ``` sh
 bundle install
 ```
-Database Setup
+### Database Setup<a name="database-setup"></a>
 Create the database:
 ```sh
 rails db:create
