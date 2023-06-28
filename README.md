@@ -10,6 +10,7 @@
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
   - [Install](#install)
+  - [Database Setup](#database-setup)
   - [Usage](#usage)
   - [Run tests](#run-tests)
 - [👥 Authors](#authors)
@@ -76,23 +77,44 @@ In order to run this project you need:
 - Install [Ruby](https://rubyinstaller.org/)
 - Install [Rails](https://rubyonrails.org/)
 
-### Setup
+### Setup <a name="setup"></a>
 
 Clone this repository to your desired folder:
-
 ```sh
-  cd my-folder
-  git clone git@github.com:everinurmind/rails-blog-app.git
+cd my-folder
 ```
-
-### Usage
-
-To run the project, execute the following commands:
-
 ```sh
-  rails s
+git clone git@github.com:everinurmind/rails-blog-app.git
 ```
+Change into the project's directory:
+```sh
+cd rails-blog-app
+```
+Install dependencies:
+``` sh
+bundle install
+```
+### Database Setup<a name="database-setup"></a>
+Create the database:
+```sh
+rails db:create
+```
+Run the database migrations:
+```sh
+rails db:migrate
+```
+### Usage <a name="usage"></a>
+To start the Rails server and run the application, use the following command:
+```sh
+rails s
+```
+You can now access the Rails Blog app by visiting http://localhost:3000 in your web browser.
 
+### Run tests <a name="run-tests"></a>
+To run the tests for the Rails Blog app, you can use the following command:
+```sh
+rails test
+```
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- AUTHORS -->

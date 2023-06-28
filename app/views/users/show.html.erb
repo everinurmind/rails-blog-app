@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>User Profile</title>
+  <link rel="stylesheet" type="text/css" href="/assets/stylesheets/custom.css">
+</head>
+<body>
   <h1>User Profile</h1>
-  <h2>Name: <%= @user.name %></h2>
-  <p>Photo: <%= @user.photo %></p>
-  <p>Bio: <%= @user.bio %></p>
-  <h3>Recent Posts</h3>
-  <ul>
-    <% @user.recent_posts.each do |post| %>
-      <li><%= link_to post.title, user_post_path(@user, post) %></li>
-    <% end %>
-  </ul>
+  <div class="info">
+    <h2>Name: <%= @user.name %></h2>
+    <%= image_tag @user.photo, class: "user-photo" if @user.photo.present? %>
+    <p class="user-bio">Bio: <%= @user.bio %></p>
+    <h3>Recent Posts</h3>
+    <ul class="user-posts">
+      <% @user.recent_posts.each do |post| %>
+        <li>
+          <%= link_to user_post_path(@user, post), class: "post-card" do %>
+            <div class="post-meta">
+              <span class="post-title"><%= post.title %></span>
+              <span class="post-footer"><%= time_ago_in_words(post.created_at) %> ago</span>
+            </div>
+            <p class="post-header">by <%= post.author.name %></p>
+            <p class="post-content"><%= post.text %></p>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+    <%= link_to "Show All Posts", user_posts_path(@user), class: "show-all-posts-button" %>
+  </div>
+</body>
 </html>
