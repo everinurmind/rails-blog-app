@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   def index
     @user = User.find(params[:user_id])
     @posts = @user.posts
+    @post = Post.new # Initialize a new post object
   end
 
   def show
@@ -12,8 +13,13 @@ class PostsController < ApplicationController
     @post = @user.posts.find(params[:id])
   end
 
-  def create
+  def new
     @user = User.find(params[:user_id])
+    @post = @user.posts.build
+  end
+
+  def create
+    @user = current_user
     @post = @user.posts.build(post_params)
 
     if @post.save
