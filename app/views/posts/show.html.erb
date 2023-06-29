@@ -10,6 +10,10 @@
   <p>Text: <%= @post.text %></p>
   <p>Comments Counter: <%= @post.comments_counter %></p>
   <p>Likes Counter: <%= @post.likes_counter %></p>
+  <h3>Add Like</h3>
+<%= form_with(model: [@post, @post.likes.build], url: user_post_likes_path(@post.author, @post)) do |form| %>
+  <%= form.submit "Like" %>
+<% end %>
   <h3>All Comments</h3>
   <ul class="comments-list">
     <% @post.comments.each do |comment| %>
@@ -19,5 +23,13 @@
   </li>
 <% end %>
   </ul>
+  <h3>Create a Comment</h3>
+<%= form_with(model: [@post, @post.comments.build], url: user_post_comments_path(@post.author, @post)) do |form| %>
+  <div class="field">
+    <%= form.label :text %>
+    <%= form.text_area :text %>
+  </div>
+  <%= form.submit "Create Comment" %>
+<% end %>
 </body>
 </html>
