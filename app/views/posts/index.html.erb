@@ -6,19 +6,37 @@
 </head>
 <body>
   <h1>All Posts by <%= @user.name %></h1>
+
+  <h3>Create a Post</h3>
+  <%= form_with(model: [@user, @user.posts.build], url: user_posts_path(@user)) do |form| %>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title %>
+    </div>
+    <div class="field">
+      <%= form.label :text %>
+      <%= form.text_area :text %>
+    </div>
+    <%= form.submit "Create Post" %>
+  <% end %>
+
   <ul class="user-posts">
-    <% @posts.each do |post| %>
-      <li>
-        <%= link_to user_post_path(@user, post), class: "post-card" do %>
-          <div class="post-meta">
-            <span class="post-title"><%= post.title %></span>
-            <span class="post-footer"><%= time_ago_in_words(post.created_at) %> ago</span>
-          </div>
-          <p class="post-header">by <%= post.author.name %></p>
-          <p class="post-content"><%= post.text %></p>
-        <% end %>
-      </li>
+<% @posts.each do |post| %>
+  <li>
+    <% if post.id.present? %>
+      <%= link_to user_post_path(post.author, post), class: "post-card" do %>
+        <div class="post-meta">
+          <span class="post-title"><%= post.title %></span>
+          <span class="post-footer"><%= time_ago_in_words(post.created_at) %> ago</span>
+        </div>
+        <p class="post-header">by <%= post.author.name %></p>
+        <p class="post-content"><%= post.text %></p>
+      <% end %>
+    <% else %>
+      <p class="post-error">Invalid post</p>
     <% end %>
+  </li>
+<% end %>
   </ul>
 </body>
 </html>
