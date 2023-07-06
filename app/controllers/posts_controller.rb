@@ -3,9 +3,9 @@ require_relative '../models/post'
 
 class PostsController < ApplicationController
   def index
-    @user = User.find(params[:user_id])
+    @user = User.includes(posts: [:comments]).find(params[:user_id])
     @posts = @user.posts
-    @post = Post.new # Initialize a new post object
+    @post = Post.new
   end
 
   def show
