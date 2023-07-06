@@ -126,6 +126,11 @@ rails test
 - GitHub: [@everinurmind](https://github.com/everinurmind)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/everinurmind/)
 
+👤 **Ghulam Reza Rajabi**
+
+- GitHub: [@ghreza-crypto](https://github.com/ghreza-crypto)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/ghulam-reza-rajabi-7a9aa3142/?originalSubdomain=af)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- FUTURE FEATURES -->
