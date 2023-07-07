@@ -2,30 +2,22 @@
 <html>
 <head>
   <title>All Users</title>
-  <link rel="stylesheet" type="text/css" href="/assets/stylesheets/custom.css">
 </head>
 <body>
   <h1>All Users</h1>
   <ul class="user-list">
     <% @users.each do |user| %>
       <li>
-  <% if user.photo.present? %>
-    <%= link_to user_path(user), class: "user-preview" do %>
-      <%= image_tag user.photo, class: "image" %>
-      <div>
-        <h2><%= user.name %></h2>
-        <sub><%= user.bio %></sub>
-      </div>
-    <% end %>
-  <% else %>
-    <%= link_to user_path(user), class: "user-preview" do %>
-      <div>
-        <h2><%= user.name %></h2>
-        <sub><%= user.bio %></sub>
-      </div>
-    <% end %>
-  <% end %>
-</li>
+        <%= link_to user_path(user), class: "user-preview" do %>
+          <% if user.photo.present? %>
+            <%= image_tag user.photo, class: "image" %>
+          <% end %>
+          <div>
+            <h2><%= user.name %></h2>
+            <p><%= pluralize(user.posts_counter, 'post') %> written</p>
+          </div>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 </body>

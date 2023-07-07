@@ -2,34 +2,31 @@
 <html>
 <head>
   <title>Post</title>
-  <link rel="stylesheet" type="text/css" href="/assets/stylesheets/custom.css">
 </head>
 <body>
   <h1>Post</h1>
   <h2>Title: <%= @post.title %></h2>
-  <p>Text: <%= @post.text %></p>
-  <p>Comments Counter: <%= @post.comments_counter %></p>
-  <p>Likes Counter: <%= @post.likes_counter %></p>
-  <h3>Add Like</h3>
-<%= form_with(model: [@post, @post.likes.build], url: user_post_likes_path(@post.author, @post)) do |form| %>
+  <p>Author: <%= @post.author.name %></p>
+  <p>Comments: <%= pluralize(@post.comments_counter, 'comment') %></p>
+  <p>Likes: <%= pluralize(@post.likes_counter, 'like') %></p>
+  <%= form_with(model: [@post, @post.likes.build], url: user_post_likes_path(@post.author, @post)) do |form| %>
   <%= form.submit "Like" %>
 <% end %>
-  <h3>All Comments</h3>
-  <ul class="comments-list">
-    <% @post.comments.each do |comment| %>
-  <li class="comment-item">
-    <div class="comment-author"><%= comment.author&.name %></div>
-    <div class="comment-text"><%= comment.text %></div>
-  </li>
+  <p>Body: <%= @post.text %></p>
+  <h3>Comments:</h3>
+<% @post.comments.each do |comment| %>
+  <% if comment.author.present? %>
+    <p><%= comment.author.name %>: <%= comment.text %></p>
+  <% end %>
 <% end %>
-  </ul>
-  <h3>Create a Comment</h3>
-<%= form_with(model: [@post, @post.comments.build], url: user_post_comments_path(@post.author, @post)) do |form| %>
+
+  <h3>Add a Comment</h3>
+<%= form_with(model: [@post, Comment.new], url: user_post_comments_path(@post.author, @post)) do |form| %>
   <div class="field">
     <%= form.label :text %>
     <%= form.text_area :text %>
   </div>
-  <%= form.submit "Create Comment" %>
+  <%= form.submit "Add Comment" %>
 <% end %>
 </body>
 </html>
