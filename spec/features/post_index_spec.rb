@@ -20,7 +20,7 @@ RSpec.describe 'User Post Index Page', type: :feature do
     expect(page).to have_content(user.name)
   end
 
-  it "displays the number of posts the user has written" do
+  it 'displays the number of posts the user has written' do
     expect(page).to have_content("Number of Posts: #{user.posts.count}")
   end
 
@@ -57,7 +57,7 @@ RSpec.describe 'User Post Index Page', type: :feature do
   end
 
   it 'displays a section for pagination if there are more posts than fit on the view' do
-    # no pagination
+    expect(page).to have_button('Pagination')
   end
 
   it "redirects to a post's show page when clicked" do
