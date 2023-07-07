@@ -11,7 +11,7 @@
       <%= image_tag @user.photo, class: "user-photo" %>
     <% end %>
     <p>Bio: <%= @user.bio %></p>
-
+    <p>Number of Posts: <%= @user.posts.count %></p>
     <h3>Recent Posts</h3>
     <ul class="user-posts">
       <% @user.recent_posts.each do |post| %>

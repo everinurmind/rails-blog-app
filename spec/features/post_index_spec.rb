@@ -12,8 +12,16 @@ RSpec.describe 'User Post Index Page', type: :feature do
     visit user_posts_path(user)
   end
 
+  it "displays the user's profile picture" do
+    expect(page).to have_css("img[src*='image1']")
+  end
+
   it "displays the user's username" do
     expect(page).to have_content(user.name)
+  end
+
+  it "displays the number of posts the user has written" do
+    expect(page).to have_content("Number of Posts: #{user.posts.count}")
   end
 
   it "displays a post's title" do

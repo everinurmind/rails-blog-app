@@ -5,7 +5,10 @@
 </head>
 <body>
   <h1>All Posts by <%= @user.name %></h1>
-
+  <% if @user.photo.present? %>
+    <%= image_tag @user.photo, class: "user-photo" %>
+  <% end %>
+  <p>Number of Posts: <%= @user.posts.count %></p>
   <ul class="user-posts">
     <% @posts.each do |post| %>
       <li>
