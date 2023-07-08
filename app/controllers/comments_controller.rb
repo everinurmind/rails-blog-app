@@ -1,15 +1,22 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
 
+  def index
+    @post = Post.find(params[:post_id])
+    @comments = @post.comments
+
+    render json: @comments
+  end
+
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.build(comment_params)
     @comment.author = current_user
 
     if @comment.save
-      redirect_to user_post_path(@post.author, @post), notice: 'Comment created successfully.'
+      render json: @comment, status: :created
     else
-      redirect_to user_post_path(@post.author, @post), alert: 'Failed to create comment.'
+      render json: { error: 'Failed to create comment.' }, status: :unprocessable_entity
     end
   end
 
