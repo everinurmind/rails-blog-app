@@ -1,16 +1,17 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
-
+  def index
+    @post = Post.find(params[:post_id])
+    @likes = @post.likes
+    render json: @likes
+  end
   def create
     @post = Post.find(params[:post_id])
-    @like = @post.likes.build
-    @like.author = current_user
-    @like.user_id = current_user.id
-
+    @like = @post.likes.build(author: current_user)
     if @like.save
-      redirect_to user_post_path(@post.author, @post), notice: 'Like added successfully.'
+      render json: @like, status: :created
     else
-      redirect_to user_post_path(@post.author, @post), alert: 'Failed to add like.'
+      render json: { error: 'Failed to add like.' }, status: :unprocessable_entity
     end
   end
 end
