@@ -5,18 +5,13 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/users/sign_out', to: 'devise/sessions#destroy', as: :logout
   end
-
   get '/users', to: 'users#index'
   get '/users/:id', to: 'users#show'
-  get '/users/:user_id/posts', to: 'posts#index'
-  get '/users/:user_id/posts/:id', to: 'posts#show', as: 'user_post'
-
   resources :users do
-    resources :posts do
-      resources :comments
-      post 'likes', to: 'likes#create'
+    resources :posts, only: [:index, :show, :create, :destroy] do
+      resources :comments, only: [:index, :create, :destroy]
+      resources :likes, only: [:index, :create]
     end
-
     delete '/', to: 'users#destroy', as: 'destroy'
   end
 end
