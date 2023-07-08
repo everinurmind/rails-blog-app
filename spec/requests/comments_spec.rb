@@ -11,22 +11,22 @@ RSpec.describe 'Comments API', type: :request do
 
       response '200', 'OK' do
         schema type: :array,
-          items: {
-            type: :object,
-            properties: {
-              id: { type: :integer },
-              text: { type: :string },
-              author_id: { type: :integer },
-              post_id: { type: :integer },
-              created_at: { type: :string },
-              updated_at: { type: :string }
-            },
-            required: %w[id text author_id post_id created_at updated_at]
-          }
+               items: {
+                 type: :object,
+                 properties: {
+                   id: { type: :integer },
+                   text: { type: :string },
+                   author_id: { type: :integer },
+                   post_id: { type: :integer },
+                   created_at: { type: :string },
+                   updated_at: { type: :string }
+                 },
+                 required: %w[id text author_id post_id created_at updated_at]
+               }
 
         let(:user_id) { create(:user).id }
         let(:post_id) { create(:post, author_id: user_id).id }
-        let(:Authorization) { "Bearer #{JwtToken.encode(user_id: user_id)}" }
+        let(:Authorization) { "Bearer #{JwtToken.encode(user_id:)}" }
         run_test!
       end
     end
@@ -44,8 +44,8 @@ RSpec.describe 'Comments API', type: :request do
       response '204', 'No Content' do
         let(:user_id) { create(:user).id }
         let(:post_id) { create(:post, author_id: user_id).id }
-        let(:id) { create(:comment, post_id: post_id, author_id: user_id).id }
-        let(:Authorization) { "Bearer #{JwtToken.encode(user_id: user_id)}" }
+        let(:id) { create(:comment, post_id:, author_id: user_id).id }
+        let(:Authorization) { "Bearer #{JwtToken.encode(user_id:)}" }
         run_test!
       end
     end

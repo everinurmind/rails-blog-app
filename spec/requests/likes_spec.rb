@@ -11,21 +11,21 @@ RSpec.describe 'Likes API', type: :request do
 
       response '200', 'OK' do
         schema type: :array,
-          items: {
-            type: :object,
-            properties: {
-              id: { type: :integer },
-              author_id: { type: :integer },
-              post_id: { type: :integer },
-              created_at: { type: :string },
-              updated_at: { type: :string }
-            },
-            required: %w[id author_id post_id created_at updated_at]
-          }
+               items: {
+                 type: :object,
+                 properties: {
+                   id: { type: :integer },
+                   author_id: { type: :integer },
+                   post_id: { type: :integer },
+                   created_at: { type: :string },
+                   updated_at: { type: :string }
+                 },
+                 required: %w[id author_id post_id created_at updated_at]
+               }
 
         let(:user_id) { create(:user).id }
         let(:post_id) { create(:post, author_id: user_id).id }
-        let(:Authorization) { "Bearer #{JwtToken.encode(user_id: user_id)}" }
+        let(:Authorization) { "Bearer #{JwtToken.encode(user_id:)}" }
         run_test!
       end
     end
@@ -41,31 +41,31 @@ RSpec.describe 'Likes API', type: :request do
 
       response '201', 'Created' do
         schema type: :object,
-          properties: {
-            id: { type: :integer },
-            author_id: { type: :integer },
-            post_id: { type: :integer },
-            created_at: { type: :string },
-            updated_at: { type: :string }
-          },
-          required: %w[id author_id post_id created_at updated_at]
+               properties: {
+                 id: { type: :integer },
+                 author_id: { type: :integer },
+                 post_id: { type: :integer },
+                 created_at: { type: :string },
+                 updated_at: { type: :string }
+               },
+               required: %w[id author_id post_id created_at updated_at]
 
         let(:user_id) { create(:user).id }
         let(:post_id) { create(:post, author_id: user_id).id }
-        let(:Authorization) { "Bearer #{JwtToken.encode(user_id: user_id)}" }
+        let(:Authorization) { "Bearer #{JwtToken.encode(user_id:)}" }
         run_test!
       end
 
       response '422', 'Unprocessable Entity' do
         schema type: :object,
-          properties: {
-            error: { type: :string }
-          },
-          required: %w[error]
+               properties: {
+                 error: { type: :string }
+               },
+               required: %w[error]
 
         let(:user_id) { create(:user).id }
         let(:post_id) { create(:post, author_id: user_id).id }
-        let(:Authorization) { "Bearer #{JwtToken.encode(user_id: user_id)}" }
+        let(:Authorization) { "Bearer #{JwtToken.encode(user_id:)}" }
         run_test!
       end
     end
