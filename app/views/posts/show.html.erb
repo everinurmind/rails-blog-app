@@ -4,6 +4,9 @@
   <title>Post</title>
 </head>
 <body>
+<% if user_signed_in? %>
+        <%= link_to "Sign out", :logout, method: :delete, class: "" %>
+      <% end %>
   <h1>Post</h1>
   <h2>Title: <%= @post.title %></h2>
   <p>Author: <%= @post.author.name %></p>

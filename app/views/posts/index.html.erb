@@ -4,6 +4,9 @@
   <title>All Posts by <%= @user.name %></title>
 </head>
 <body>
+<% if user_signed_in? %>
+        <%= link_to "Sign out", :logout, method: :delete, class: "" %>
+      <% end %>
   <h1>All Posts by <%= @user.name %></h1>
   <% if @user.photo.present? %>
     <%= image_tag @user.photo, class: "user-photo" %>

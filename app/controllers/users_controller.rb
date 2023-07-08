@@ -1,6 +1,8 @@
 require_relative '../models/user'
 
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+
   def index
     @users = User.all
   end
@@ -12,6 +14,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.photo = params[:user][:photo] if params[:user][:photo].present?
+
+    if @user.save
+      redirect_to user_path(@user), notice: 'User created successfully.'
+    else
+      render :new, alert: 'Failed to create user.'
+    end
   end
 
   def destroy

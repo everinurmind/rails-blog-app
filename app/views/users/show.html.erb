@@ -4,7 +4,11 @@
   <title>User Profile</title>
 </head>
 <body>
+ 
   <h1>User Profile</h1>
+  <% if user_signed_in? %>
+        <%= link_to "Sign out", :logout, method: :delete, class: "" %>
+      <% end %>
   <div class="info">
     <h2>Name: <%= @user.name %></h2>
     <% if @user.photo.present? %>
