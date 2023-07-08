@@ -6,10 +6,10 @@ Rails.application.routes.draw do
     get '/users/sign_out', to: 'devise/sessions#destroy', as: :logout
   end
 
-  get '/users', to: 'users#index'
-  get '/users/:id', to: 'users#show'
-  get '/users/:user_id/posts', to: 'posts#index'
-  get '/users/:user_id/posts/:id', to: 'posts#show', as: 'user_post'
+  get '/users/:user_id/posts', to: 'posts#index', defaults: { format: 'json' }
+  get '/users/:user_id/posts/:id/comments', to: 'comments#index', defaults: { format: 'json' }
+  
+  post '/users/:user_id/posts/:post_id/comments', to: 'comments#create', defaults: { format: 'json' }
 
   resources :users do
     resources :posts do
