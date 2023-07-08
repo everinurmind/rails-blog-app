@@ -5,18 +5,13 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/users/sign_out', to: 'devise/sessions#destroy', as: :logout
   end
-
-  get '/users/:user_id/posts', to: 'posts#index', defaults: { format: 'json' }
-  get '/users/:user_id/posts/:id/comments', to: 'comments#index', defaults: { format: 'json' }
-  
-  post '/users/:user_id/posts/:post_id/comments', to: 'comments#create', defaults: { format: 'json' }
-
+  get '/users', to: 'users#index'
+  get '/users/:id', to: 'users#show'
   resources :users do
-    resources :posts do
-      resources :comments
-      post 'likes', to: 'likes#create'
+    resources :posts, only: [:index, :show, :create, :destroy] do
+      resources :comments, only: [:index, :create, :destroy]
+      resources :likes, only: [:index, :create]
     end
-
     delete '/', to: 'users#destroy', as: 'destroy'
   end
 end
