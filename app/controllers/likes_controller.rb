@@ -5,6 +5,7 @@ class LikesController < ApplicationController
     @likes = @post.likes
     render json: @likes
   end
+
   def create
     @post = Post.find(params[:post_id])
     @like = @post.likes.build(author: current_user)
