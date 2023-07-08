@@ -8,6 +8,9 @@
         <%= link_to "Sign out", :logout, method: :delete, class: "" %>
       <% end %>
   <h1>Post</h1>
+  <% if can? :destroy, @post %>
+    <%= button_to 'Delete', user_post_path(@user, @post), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
   <h2>Title: <%= @post.title %></h2>
   <p>Author: <%= @post.author.name %></p>
   <p>Comments: <%= pluralize(@post.comments_counter, 'comment') %></p>
@@ -30,6 +33,11 @@
     <%= form.text_area :text %>
   </div>
   <%= form.submit "Add Comment" %>
+<% end %>
+<% @post.comments.each do |comment| %>
+  <% if can? :destroy, comment %>
+    <%= button_to 'Delete', user_post_comment_path(@post.author, @post, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
 <% end %>
 </body>
 </html>
